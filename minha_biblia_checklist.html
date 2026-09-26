@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Minha Bíblia — Checklist</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#10120f;color:#f7f4ea;font-family:Arial,sans-serif}
+header{padding:28px 18px 20px;background:linear-gradient(145deg,#263421,#10120f);position:sticky;top:0;z-index:5;border-bottom:1px solid #343b31}
+h1{margin:0;font-size:29px}.sub{margin-top:6px;color:#bfc5b8;font-size:14px}
+.progress{margin-top:18px}.line{display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px}
+.bar{height:9px;background:#30352e;border-radius:20px;overflow:hidden}.fill{height:100%;width:0;background:#9aaa67;transition:.25s}
+main{max-width:700px;margin:auto;padding:15px 14px 30px}
+.buttons{display:flex;gap:8px;margin-bottom:15px}button{background:#1d211b;color:#eee;border:1px solid #3a4135;border-radius:12px;padding:10px 12px}
+h2{font-size:18px;margin:22px 3px 9px;color:#d8decf}
+.book{display:flex;align-items:center;gap:11px;padding:13px 12px;margin:7px 0;background:#191c17;border:1px solid #2b3028;border-radius:13px;cursor:pointer}
+input{display:none}.check{width:25px;height:25px;border:2px solid #666e5e;border-radius:7px;flex:0 0 25px;position:relative}
+input:checked+.check{background:#7f934f;border-color:#7f934f}input:checked+.check:after{content:"✓";position:absolute;left:5px;top:1px;font-weight:bold}
+.num{color:#7f8778;font-size:12px;width:25px;text-align:center}.name{font-size:15px;font-weight:600}
+.book:has(input:checked){opacity:.55}.book:has(input:checked) .name{text-decoration:line-through}
+footer{text-align:center;color:#687061;font-size:12px;padding-bottom:30px}
+</style></head>
+<body>
+<header><h1>📖 Minha Bíblia</h1><div class="sub">Checklist de leitura dos livros da Bíblia</div>
+<div class="progress"><div class="line"><span>Progresso</span><strong><span id="percent">0%</span> · <span id="count">0/73</span></strong></div>
+<div class="bar"><div class="fill" id="fill"></div></div></div></header>
+<main><div class="buttons"><button onclick="markAll()">✓ Marcar tudo</button><button onclick="clearAll()">↺ Limpar tudo</button></div>
+<h2>Antigo Testamento</h2>
+<label class="book" data-id="0">
+      <input type="checkbox" onchange="toggleBook(0,this.checked)">
+      <span class="check"></span><span class="num">1</span>
+      <span class="name">Gênesis</span>
+    </label><label class="book" data-id="1">
+      <input type="checkbox" onchange="toggleBook(1,this.checked)">
+      <span class="check"></span><span class="num">2</span>
+      <span class="name">Êxodo</span>
+    </label><label class="book" data-id="2">
+      <input type="checkbox" onchange="toggleBook(2,this.checked)">
+      <span class="check"></span><span class="num">3</span>
+      <span class="name">Levítico</span>
+    </label><label class="book" data-id="3">
+      <input type="checkbox" onchange="toggleBook(3,this.checked)">
+      <span class="check"></span><span class="num">4</span>
+      <span class="name">Números</span>
+    </label><label class="book" data-id="4">
+      <input type="checkbox" onchange="toggleBook(4,this.checked)">
+      <span class="check"></span><span class="num">5</span>
+      <span class="name">Deuteronômio</span>
+    </label><label class="book" data-id="5">
+      <input type="checkbox" onchange="toggleBook(5,this.checked)">
+      <span class="check"></span><span class="num">6</span>
+      <span class="name">Josué</span>
+    </label><label class="book" data-id="6">
+      <input type="checkbox" onchange="toggleBook(6,this.checked)">
+      <span class="check"></span><span class="num">7</span>
+      <span class="name">Juízes</span>
+    </label><label class="book" data-id="7">
+      <input type="checkbox" onchange="toggleBook(7,this.checked)">
+      <span class="check"></span><span class="num">8</span>
+      <span class="name">Rute</span>
+    </label><label class="book" data-id="8">
+      <input type="checkbox" onchange="toggleBook(8,this.checked)">
+      <span class="check"></span><span class="num">9</span>
+      <span class="name">1 Samuel</span>
+    </label><label class="book" data-id="9">
+      <input type="checkbox" onchange="toggleBook(9,this.checked)">
+      <span class="check"></span><span class="num">10</span>
+      <span class="name">2 Samuel</span>
+    </label><label class="book" data-id="10">
+      <input type="checkbox" onchange="toggleBook(10,this.checked)">
+      <span class="check"></span><span class="num">11</span>
+      <span class="name">1 Reis</span>
+    </label><label class="book" data-id="11">
+      <input type="checkbox" onchange="toggleBook(11,this.checked)">
+      <span class="check"></span><span class="num">12</span>
+      <span class="name">2 Reis</span>
+    </label><label class="book" data-id="12">
+      <input type="checkbox" onchange="toggleBook(12,this.checked)">
+      <span class="check"></span><span class="num">13</span>
+      <span class="name">1 Crônicas</span>
+    </label><label class="book" data-id="13">
+      <input type="checkbox" onchange="toggleBook(13,this.checked)">
+      <span class="check"></span><span class="num">14</span>
+      <span class="name">2 Crônicas</span>
+    </label><label class="book" data-id="14">
+      <input type="checkbox" onchange="toggleBook(14,this.checked)">
+      <span class="check"></span><span class="num">15</span>
+      <span class="name">Esdras</span>
+    </label><label class="book" data-id="15">
+      <input type="checkbox" onchange="toggleBook(15,this.checked)">
+      <span class="check"></span><span class="num">16</span>
+      <span class="name">Neemias</span>
+    </label><label class="book" data-id="16">
+      <input type="checkbox" onchange="toggleBook(16,this.checked)">
+      <span class="check"></span><span class="num">17</span>
+      <span class="name">Tobias</span>
+    </label><label class="book" data-id="17">
+      <input type="checkbox" onchange="toggleBook(17,this.checked)">
+      <span class="check"></span><span class="num">18</span>
+      <span class="name">Judite</span>
+    </label><label class="book" data-id="18">
+      <input type="checkbox" onchange="toggleBook(18,this.checked)">
+      <span class="check"></span><span class="num">19</span>
+      <span class="name">Ester</span>
+    </label><label class="book" data-id="19">
+      <input type="checkbox" onchange="toggleBook(19,this.checked)">
+      <span class="check"></span><span class="num">20</span>
+      <span class="name">1 Macabeus</span>
+    </label><label class="book" data-id="20">
+      <input type="checkbox" onchange="toggleBook(20,this.checked)">
+      <span class="check"></span><span class="num">21</span>
+      <span class="name">2 Macabeus</span>
+    </label><label class="book" data-id="21">
+      <input type="checkbox" onchange="toggleBook(21,this.checked)">
+      <span class="check"></span><span class="num">22</span>
+      <span class="name">Jó</span>
+    </label><label class="book" data-id="22">
+      <input type="checkbox" onchange="toggleBook(22,this.checked)">
+      <span class="check"></span><span class="num">23</span>
+      <span class="name">Salmos</span>
+    </label><label class="book" data-id="23">
+      <input type="checkbox" onchange="toggleBook(23,this.checked)">
+      <span class="check"></span><span class="num">24</span>
+      <span class="name">Provérbios</span>
+    </label><label class="book" data-id="24">
+      <input type="checkbox" onchange="toggleBook(24,this.checked)">
+      <span class="check"></span><span class="num">25</span>
+      <span class="name">Eclesiastes</span>
+    </label><label class="book" data-id="25">
+      <input type="checkbox" onchange="toggleBook(25,this.checked)">
+      <span class="check"></span><span class="num">26</span>
+      <span class="name">Cântico dos Cânticos</span>
+    </label><label class="book" data-id="26">
+      <input type="checkbox" onchange="toggleBook(26,this.checked)">
+      <span class="check"></span><span class="num">27</span>
+      <span class="name">Sabedoria</span>
+    </label><label class="book" data-id="27">
+      <input type="checkbox" onchange="toggleBook(27,this.checked)">
+      <span class="check"></span><span class="num">28</span>
+      <span class="name">Eclesiástico</span>
+    </label><label class="book" data-id="28">
+      <input type="checkbox" onchange="toggleBook(28,this.checked)">
+      <span class="check"></span><span class="num">29</span>
+      <span class="name">Isaías</span>
+    </label><label class="book" data-id="29">
+      <input type="checkbox" onchange="toggleBook(29,this.checked)">
+      <span class="check"></span><span class="num">30</span>
+      <span class="name">Jeremias</span>
+    </label><label class="book" data-id="30">
+      <input type="checkbox" onchange="toggleBook(30,this.checked)">
+      <span class="check"></span><span class="num">31</span>
+      <span class="name">Lamentações</span>
+    </label><label class="book" data-id="31">
+      <input type="checkbox" onchange="toggleBook(31,this.checked)">
+      <span class="check"></span><span class="num">32</span>
+      <span class="name">Baruc</span>
+    </label><label class="book" data-id="32">
+      <input type="checkbox" onchange="toggleBook(32,this.checked)">
+      <span class="check"></span><span class="num">33</span>
+      <span class="name">Ezequiel</span>
+    </label><label class="book" data-id="33">
+      <input type="checkbox" onchange="toggleBook(33,this.checked)">
+      <span class="check"></span><span class="num">34</span>
+      <span class="name">Daniel</span>
+    </label><label class="book" data-id="34">
+      <input type="checkbox" onchange="toggleBook(34,this.checked)">
+      <span class="check"></span><span class="num">35</span>
+      <span class="name">Oséias</span>
+    </label><label class="book" data-id="35">
+      <input type="checkbox" onchange="toggleBook(35,this.checked)">
+      <span class="check"></span><span class="num">36</span>
+      <span class="name">Joel</span>
+    </label><label class="book" data-id="36">
+      <input type="checkbox" onchange="toggleBook(36,this.checked)">
+      <span class="check"></span><span class="num">37</span>
+      <span class="name">Amós</span>
+    </label><label class="book" data-id="37">
+      <input type="checkbox" onchange="toggleBook(37,this.checked)">
+      <span class="check"></span><span class="num">38</span>
+      <span class="name">Obadias</span>
+    </label><label class="book" data-id="38">
+      <input type="checkbox" onchange="toggleBook(38,this.checked)">
+      <span class="check"></span><span class="num">39</span>
+      <span class="name">Jonas</span>
+    </label><label class="book" data-id="39">
+      <input type="checkbox" onchange="toggleBook(39,this.checked)">
+      <span class="check"></span><span class="num">40</span>
+      <span class="name">Miquéias</span>
+    </label><label class="book" data-id="40">
+      <input type="checkbox" onchange="toggleBook(40,this.checked)">
+      <span class="check"></span><span class="num">41</span>
+      <span class="name">Naum</span>
+    </label><label class="book" data-id="41">
+      <input type="checkbox" onchange="toggleBook(41,this.checked)">
+      <span class="check"></span><span class="num">42</span>
+      <span class="name">Habacuque</span>
+    </label><label class="book" data-id="42">
+      <input type="checkbox" onchange="toggleBook(42,this.checked)">
+      <span class="check"></span><span class="num">43</span>
+      <span class="name">Sofonias</span>
+    </label><label class="book" data-id="43">
+      <input type="checkbox" onchange="toggleBook(43,this.checked)">
+      <span class="check"></span><span class="num">44</span>
+      <span class="name">Ageu</span>
+    </label><label class="book" data-id="44">
+      <input type="checkbox" onchange="toggleBook(44,this.checked)">
+      <span class="check"></span><span class="num">45</span>
+      <span class="name">Zacarias</span>
+    </label><label class="book" data-id="45">
+      <input type="checkbox" onchange="toggleBook(45,this.checked)">
+      <span class="check"></span><span class="num">46</span>
+      <span class="name">Malaquias</span>
+    </label>
+<h2>Novo Testamento</h2>
+<label class="book" data-id="46">
+      <input type="checkbox" onchange="toggleBook(46,this.checked)">
+      <span class="check"></span><span class="num">47</span>
+      <span class="name">Mateus</span>
+    </label><label class="book" data-id="47">
+      <input type="checkbox" onchange="toggleBook(47,this.checked)">
+      <span class="check"></span><span class="num">48</span>
+      <span class="name">Marcos</span>
+    </label><label class="book" data-id="48">
+      <input type="checkbox" onchange="toggleBook(48,this.checked)">
+      <span class="check"></span><span class="num">49</span>
+      <span class="name">Lucas</span>
+    </label><label class="book" data-id="49">
+      <input type="checkbox" onchange="toggleBook(49,this.checked)">
+      <span class="check"></span><span class="num">50</span>
+      <span class="name">João</span>
+    </label><label class="book" data-id="50">
+      <input type="checkbox" onchange="toggleBook(50,this.checked)">
+      <span class="check"></span><span class="num">51</span>
+      <span class="name">Atos dos Apóstolos</span>
+    </label><label class="book" data-id="51">
+      <input type="checkbox" onchange="toggleBook(51,this.checked)">
+      <span class="check"></span><span class="num">52</span>
+      <span class="name">Romanos</span>
+    </label><label class="book" data-id="52">
+      <input type="checkbox" onchange="toggleBook(52,this.checked)">
+      <span class="check"></span><span class="num">53</span>
+      <span class="name">1 Coríntios</span>
+    </label><label class="book" data-id="53">
+      <input type="checkbox" onchange="toggleBook(53,this.checked)">
+      <span class="check"></span><span class="num">54</span>
+      <span class="name">2 Coríntios</span>
+    </label><label class="book" data-id="54">
+      <input type="checkbox" onchange="toggleBook(54,this.checked)">
+      <span class="check"></span><span class="num">55</span>
+      <span class="name">Gálatas</span>
+    </label><label class="book" data-id="55">
+      <input type="checkbox" onchange="toggleBook(55,this.checked)">
+      <span class="check"></span><span class="num">56</span>
+      <span class="name">Efésios</span>
+    </label><label class="book" data-id="56">
+      <input type="checkbox" onchange="toggleBook(56,this.checked)">
+      <span class="check"></span><span class="num">57</span>
+      <span class="name">Filipenses</span>
+    </label><label class="book" data-id="57">
+      <input type="checkbox" onchange="toggleBook(57,this.checked)">
+      <span class="check"></span><span class="num">58</span>
+      <span class="name">Colossenses</span>
+    </label><label class="book" data-id="58">
+      <input type="checkbox" onchange="toggleBook(58,this.checked)">
+      <span class="check"></span><span class="num">59</span>
+      <span class="name">1 Tessalonicenses</span>
+    </label><label class="book" data-id="59">
+      <input type="checkbox" onchange="toggleBook(59,this.checked)">
+      <span class="check"></span><span class="num">60</span>
+      <span class="name">2 Tessalonicenses</span>
+    </label><label class="book" data-id="60">
+      <input type="checkbox" onchange="toggleBook(60,this.checked)">
+      <span class="check"></span><span class="num">61</span>
+      <span class="name">1 Timóteo</span>
+    </label><label class="book" data-id="61">
+      <input type="checkbox" onchange="toggleBook(61,this.checked)">
+      <span class="check"></span><span class="num">62</span>
+      <span class="name">2 Timóteo</span>
+    </label><label class="book" data-id="62">
+      <input type="checkbox" onchange="toggleBook(62,this.checked)">
+      <span class="check"></span><span class="num">63</span>
+      <span class="name">Tito</span>
+    </label><label class="book" data-id="63">
+      <input type="checkbox" onchange="toggleBook(63,this.checked)">
+      <span class="check"></span><span class="num">64</span>
+      <span class="name">Filemom</span>
+    </label><label class="book" data-id="64">
+      <input type="checkbox" onchange="toggleBook(64,this.checked)">
+      <span class="check"></span><span class="num">65</span>
+      <span class="name">Hebreus</span>
+    </label><label class="book" data-id="65">
+      <input type="checkbox" onchange="toggleBook(65,this.checked)">
+      <span class="check"></span><span class="num">66</span>
+      <span class="name">Tiago</span>
+    </label><label class="book" data-id="66">
+      <input type="checkbox" onchange="toggleBook(66,this.checked)">
+      <span class="check"></span><span class="num">67</span>
+      <span class="name">1 Pedro</span>
+    </label><label class="book" data-id="67">
+      <input type="checkbox" onchange="toggleBook(67,this.checked)">
+      <span class="check"></span><span class="num">68</span>
+      <span class="name">2 Pedro</span>
+    </label><label class="book" data-id="68">
+      <input type="checkbox" onchange="toggleBook(68,this.checked)">
+      <span class="check"></span><span class="num">69</span>
+      <span class="name">1 João</span>
+    </label><label class="book" data-id="69">
+      <input type="checkbox" onchange="toggleBook(69,this.checked)">
+      <span class="check"></span><span class="num">70</span>
+      <span class="name">2 João</span>
+    </label><label class="book" data-id="70">
+      <input type="checkbox" onchange="toggleBook(70,this.checked)">
+      <span class="check"></span><span class="num">71</span>
+      <span class="name">3 João</span>
+    </label><label class="book" data-id="71">
+      <input type="checkbox" onchange="toggleBook(71,this.checked)">
+      <span class="check"></span><span class="num">72</span>
+      <span class="name">Judas</span>
+    </label><label class="book" data-id="72">
+      <input type="checkbox" onchange="toggleBook(72,this.checked)">
+      <span class="check"></span><span class="num">73</span>
+      <span class="name">Apocalipse</span>
+    </label>
+</main><footer>Seu progresso fica salvo neste navegador 🤍</footer>
+<script>
+const KEY="biblia-checklist-v1";
+function get(){return JSON.parse(localStorage.getItem(KEY)||"[]")}
+function save(a){localStorage.setItem(KEY,JSON.stringify(a))}
+function toggleBook(i,on){let a=get();if(on&&!a.includes(i))a.push(i);if(!on)a=a.filter(x=>x!==i);save(a);update()}
+function update(){let a=get();document.querySelectorAll("input").forEach((c,i)=>c.checked=a.includes(i));document.getElementById("count").textContent=a.length+"/73";document.getElementById("percent").textContent=Math.round(a.length/73*100)+"%";document.getElementById("fill").style.width=(a.length/73*100)+"%"}
+function markAll(){save([...Array(73).keys()]);update()}
+function clearAll(){save([]);update()}
+update();
+</script></body></html>
